@@ -1,0 +1,263 @@
+---
+title: "CSLI 2019 R Tutorial"
+author: "Tobias Gerstenberg"
+date: "June 26, 2019"
+output:
+  bookdown::html_document2:
+    toc: true
+    toc_depth: 4
+    theme: cosmo
+    highlight: tango
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	fig.show = "hold",
+	comment = "",
+	results = "hold"
+)
+```
+
+```{r load-packages, message=F}
+library("knitr")
+library("tidyverse")
+```
+
+# Getting ready 
+
+## Installing R 
+
+Go on this link to download R: [https://cran.rstudio.com/](https://cran.rstudio.com/)
+
+Select the version that works for your operating system, and download the latest release (R-3.6.0).
+
+```{r, out.width="75%", echo=FALSE, fig.cap="Download R."}
+  include_graphics("../../figures/screenshots/r_install.png")
+```
+
+Once you've downloaded R, install it following the instructions on the screen. 
+
+## Installing R Studio 
+
+Go on this link to download R Studio: [https://www.rstudio.com/products/rstudio/download/#download](https://www.rstudio.com/products/rstudio/download/#download)
+
+And then download the version that works for your operating system.
+
+```{r, out.width="75%", echo=FALSE, fig.cap="Download R Studio."}
+  include_graphics("../../figures/screenshots/r_studio_install.png")
+```
+
+Once you've downloaded R Studio, install it following the instructions on the screen. 
+
+# Setting things up 
+
+## R Studio 
+
+- A great integrated development environment (IDE) in which you can do all your R coding. 
+- let's change some settings first 
+- [R Studio cheatsheet](../../figures/cheatsheets/rstudio-ide.pdf)
+
+```{r visualization1-12, out.width="75%", echo=FALSE, fig.cap="General preferences."}
+  include_graphics("../../figures/screenshots/r_preferences_general.png")
+```
+
+__Make sure that__:
+
+- Restore .RData into workspace at startup is _unselected_
+- Save workspace to .RData on exit is set to _Never_
+
+```{r visualization1-13, out.width="75%", echo=FALSE, fig.cap="Code window preferences."}
+  include_graphics("../../figures/screenshots/r_preferences_code.png")
+```
+
+__Make sure that__:
+
+- Soft-wrap R source files is _selected_
+
+This way you don't have to scroll horizontally. At the same time, avoid writing long single lines of code. For example, instead of writing code like so:
+
+```{r visualization1-14, eval=FALSE}
+ggplot(data = diamonds, aes(x = cut, y = price)) +
+  stat_summary(fun.y = "mean", geom = "bar", color = "black", fill = "lightblue", width = 0.85) +
+  stat_summary(fun.data = "mean_cl_boot", geom = "linerange", size = 1.5) +
+  labs(title = "Price as a function of quality of cut", subtitle = "Note: The price is in US dollars", tag = "A", x = "Quality of the cut", y = "Price")
+```
+
+You may want to write it this way instead:
+
+```{r visualization1-15, eval=FALSE}
+ggplot(data = diamonds, aes(x = cut, y = price)) +
+  # display the means
+  stat_summary(fun.y = "mean",
+               geom = "bar",
+               color = "black",
+               fill = "lightblue",
+               width = 0.85) +
+  # display the error bars
+  stat_summary(fun.data = "mean_cl_boot",
+               geom = "linerange",
+               size = 1.5) +
+  # change labels
+  labs(title = "Price as a function of quality of cut",
+       subtitle = "Note: The price is in US dollars", # we might want to change this later
+       tag = "A",
+       x = "Quality of the cut",
+       y = "Price")
+```
+
+This makes it much easier to see what's going on, and you can easily add comments to individual lines of code.
+
+RStudio makes it easy to write nice code. It figures out where to put the next line of code when you press `ENTER`. And if things ever get messy, just select the code of interest and hit `cmd+i` to re-indent the code.
+
+Here are some more resources with tips for how to write nice code in R:
+
+- [Advanced R style guide](http://adv-r.had.co.nz/Style.html)
+
+## Getting help
+
+There are three simple ways to get help in R. You can either put a `?` in front of the function you'd like to learn more about, or use the `help()` function.
+
+```{r visualization1-16, eval=FALSE}
+?print
+help("print")
+```
+
+>__Tip__: To see the help file, hover over a function (or dataset) with the mouse (or select the text) and then press `F1`.
+
+I recommend using `F1` to get to help files -- it's the fastest way!
+
+R help files can sometimes look a little cryptic. Most R help files have the following sections (copied from [here](https://www.dummies.com/programming/r/r-for-dummies-cheat-sheet/)):
+
+---
+
+__Title__: A one-sentence overview of the function.
+
+__Description__: An introduction to the high-level objectives of the function, typically about one paragraph long.
+
+__Usage__: A description of the syntax of the function (in other words, how the function is called). This is where you find all the arguments that you can supply to the function, as well as any default values of these arguments.
+
+__Arguments__: A description of each argument. Usually this includes a specification of the class (for example, character, numeric, list, and so on). This section is an important one to understand, because arguments are frequently a cause of errors in R.
+
+__Details__: Extended details about how the function works, provides longer descriptions of the various ways to call the function (if applicable), and a longer discussion of the arguments.
+
+__Value__: A description of the class of the value returned by the function.
+
+__See also__: Links to other relevant functions. In most of the R editors, you can click these links to read the Help files for these functions.
+
+__Examples__: Worked examples of real R code that you can paste into your console and run.
+
+---
+
+Here is the help file for the `print()` function:
+
+```{r visualization1-17, echo=FALSE, fig.cap="Help file for the print() function.", out.width="95%"}
+  include_graphics("../../figures/screenshots/help_print.png")
+```
+
+## Installing and maintaining packages 
+
+What makes R powerful is the large number of packages that have been written for R. You can install a new package like so: 
+
+```{r, eval=F}
+install.packages("tidyverse")
+```
+
+You can also install multiple packages at the same time, by concatenating the package names using the `c()` function: 
+
+```{r, eval=F}
+install.pacakges(c("tidyverse","broom"))
+```
+
+To make sure that your packages remain up to date, you can go to `Tools > Check for Package Updates ...` in R Studio. 
+
+```{r, echo=FALSE, fig.cap="Help file for the print() function.", out.width="95%"}
+  include_graphics("../../figures/screenshots/packages_1.png")
+```
+
+You can then click `Select All` and then `Install Updates`.
+
+```{r, echo=FALSE, fig.cap="Help file for the print() function.", out.width="95%"}
+  include_graphics("../../figures/screenshots/packages_2.png")
+```
+
+R Studio might ask you to restart your R session before updating the packages. 
+
+## R Markdown 
+
+- code chunks 
+- executing code chunks 
+- 
+
+- [R Markdown reference](../../figures/cheatsheets/rmarkdown-reference.pdf)
+- [R Markdown cheatsheet](../../figures/cheatsheets/rmarkdown.pdf)
+
+## Some general advice 
+
+- naming functions and files 
+- always use relative links 
+- so that stuff also works on other people's computers
+- load all the packages at the top of the script 
+- make sure that a script can be executed from top to bottom 
+- project management (folder structure)
+- don't write past the vertical rule in code blocks 
+
+# Doing stuff
+
+## Loading packages 
+
+> The order in which packages in R are loaded matters!
+
+You can refer to functions from specific packages by adding the function name at the beginning. 
+For example, this command would use the `select()` function from the `MASS` package `MASS::select()`, while this command would use the function from the `dplyr` package `dplyr::select()`. 
+
+Always load `library("tidyverse")` last because it loads a large number of functions that are frequently used. 
+
+## R syntax 
+
+- base R vs. tidyverse
+- two different coding styles 
+- the pipe 
+
+- [base R cheatsheet](../../figures/cheatsheets/base-r.pdf)
+
+## Data visualiztion 
+
+- [ggplot2 cheatsheet](../../figures/cheatsheets/data-visualization.pdf)
+- [data visualization principles cheatsheet](../../figures/cheatsheets/visualization-principles.pdf)
+- [animation cheatsheet](../../figures/cheatsheets/gganimate.pdf)
+
+## Data manipulation 
+
+### Data transformation 
+
+- [Data transformation cheatsheet](../../figures/cheatsheets/data-transformation.pdf)
+
+### Data wrangling 
+
+- [Data transformation cheatsheet](../../figures/cheatsheets/data-wrangling.pdf)
+
+## Statistics 
+
+- linear model `lm()`
+- linear mixed effects models `lmer()`
+- Bayesian models `brm()` (using `library("brms")`)
+
+## Importing data 
+
+- [importing data cheatsheet](../../figures/cheatsheets/data-import.pdf)
+
+## Help others help you 
+
+- making reproducible examples 
+
+# Where can I learn more? 
+
+## Free online books 
+
+- [R for Data Science](https://r4ds.had.co.nz/): The tidyverse bible. 
+- [YaRrr! The Pirate's Guide to R](https://bookdown.org/ndphillips/YaRrr/): Nice general introduction to R (using mostly base R).
+- [Learning statistics with R](https://learningstatisticswithr.com/book/): Introduction to statistics using R (using mostly base R).
+- [Statistical thinking for the 21st century](http://statsthinking21.org/): Course notes for psychology undergraduate statistics course taught by Russ Poldrack here at Stanford. 
+- [Statistical methods for behavioral and social sciences](https://psych252.github.io/psych252book/): Course notes for grad statistica course I teach (notes are not fully self-explanatory though). 
+
+
