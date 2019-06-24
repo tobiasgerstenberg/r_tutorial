@@ -20,6 +20,7 @@ knitr::opts_chunk$set(
 
 ```{r load-packages, message=F}
 library("knitr")
+library("reprex")
 library("tidyverse")
 ```
 
@@ -48,6 +49,20 @@ And then download the version that works for your operating system.
 ```
 
 Once you've downloaded R Studio, install it following the instructions on the screen. 
+
+# Why R? 
+
+- What R is very good at: 
+  - data visualiztion
+  - data manipulation
+  - statistics 
+  - project documentation with R Markdown 
+- What Python is very good at: 
+  - you can do everything with Python (whereas R is a more specialized language)
+  - Python is the main language for machine learning (deep learning)
+  - you can program experiments in Python 
+- Depending on what research you do, I strongly suggest to learn Python, too!
+- In my research, I use both languages together. 
 
 # Setting things up 
 
@@ -107,9 +122,9 @@ ggplot(data = diamonds, aes(x = cut, y = price)) +
 
 This makes it much easier to see what's going on, and you can easily add comments to individual lines of code.
 
-RStudio makes it easy to write nice code. It figures out where to put the next line of code when you press `ENTER`. And if things ever get messy, just select the code of interest and hit `cmd+i` to re-indent the code.
+RStudio makes it easy to write nice code. It figures out where to put the next line of code when you press `ENTER`. And if things ever get messy, just select the code of interest and hit `cmd + i` to re-indent the code.
 
-Here are some more resources with tips for how to write nice code in R:
+Here are some more tips on how to write nice code in R:
 
 - [Advanced R style guide](http://adv-r.had.co.nz/Style.html)
 
@@ -200,6 +215,9 @@ R Studio might ask you to restart your R session before updating the packages.
 - make sure that a script can be executed from top to bottom 
 - project management (folder structure)
 - don't write past the vertical rule in code blocks 
+- learning keyboard shorcuts: `Tools > Keyboard Shortcuts Help`
+- how R handles functions with arguments (order matters if arguments aren't named)
+
 
 # Doing stuff
 
@@ -222,11 +240,16 @@ Always load `library("tidyverse")` last because it loads a large number of funct
 
 ## Data visualiztion 
 
+Always visualize the data first before doing any statistical analysis! 
+
 - [ggplot2 cheatsheet](../../figures/cheatsheets/data-visualization.pdf)
 - [data visualization principles cheatsheet](../../figures/cheatsheets/visualization-principles.pdf)
 - [animation cheatsheet](../../figures/cheatsheets/gganimate.pdf)
 
 ## Data manipulation 
+
+> The quickest way to take a look at your data is to hover your mouse over a variable of a data frame, and press `F2`.
+
 
 ### Data transformation 
 
@@ -246,6 +269,8 @@ Always load `library("tidyverse")` last because it loads a large number of funct
 
 - [importing data cheatsheet](../../figures/cheatsheets/data-import.pdf)
 
+## Saving data 
+
 ## Help others help you 
 
 - making reproducible examples 
@@ -259,5 +284,14 @@ Always load `library("tidyverse")` last because it loads a large number of funct
 - [Learning statistics with R](https://learningstatisticswithr.com/book/): Introduction to statistics using R (using mostly base R).
 - [Statistical thinking for the 21st century](http://statsthinking21.org/): Course notes for psychology undergraduate statistics course taught by Russ Poldrack here at Stanford. 
 - [Statistical methods for behavioral and social sciences](https://psych252.github.io/psych252book/): Course notes for grad statistica course I teach (notes are not fully self-explanatory though). 
+- [R graphics cookbook](http://www.cookbook-r.com/Graphs/): Quick intro to the the most common graphs with `ggplot2`.
+- [Data Visualization -- A practical introduction (by Kieran Healy)](http://socviz.co/): Great resourse for data visualization with `ggplot2`.
+- [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/): Another excellent resource for data visualization with `ggplot2`.
+
+# Print out session information 
+
+```{r}
+sessionInfo()
+```
 
 
