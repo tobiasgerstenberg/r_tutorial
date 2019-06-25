@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r load-packages, message=F}
+```{r load-packages, message=F, echo=F}
 library("knitr")
 library("reprex")
 library("tidyverse")
@@ -72,7 +72,7 @@ Once you've downloaded R Studio, install it following the instructions on the sc
 - let's change some settings first 
 - [R Studio cheatsheet](../../figures/cheatsheets/rstudio-ide.pdf)
 
-```{r visualization1-12, out.width="75%", echo=FALSE, fig.cap="General preferences."}
+```{r visualization1-12, out.width="50%", echo=FALSE, fig.cap="General preferences."}
   include_graphics("../../figures/screenshots/r_preferences_general.png")
 ```
 
@@ -81,7 +81,7 @@ __Make sure that__:
 - Restore .RData into workspace at startup is _unselected_
 - Save workspace to .RData on exit is set to _Never_
 
-```{r visualization1-13, out.width="75%", echo=FALSE, fig.cap="Code window preferences."}
+```{r visualization1-13, out.width="50%", echo=FALSE, fig.cap="Code window preferences."}
   include_graphics("../../figures/screenshots/r_preferences_code.png")
 ```
 
@@ -180,18 +180,18 @@ install.packages("tidyverse")
 You can also install multiple packages at the same time, by concatenating the package names using the `c()` function: 
 
 ```{r, eval=F}
-install.pacakges(c("tidyverse","broom"))
+install.packages(c("tidyverse","broom"))
 ```
 
 To make sure that your packages remain up to date, you can go to `Tools > Check for Package Updates ...` in R Studio. 
 
-```{r, echo=FALSE, fig.cap="Help file for the print() function.", out.width="95%"}
+```{r, echo=FALSE, fig.cap="Help file for the print() function.", out.width="75%"}
   include_graphics("../../figures/screenshots/packages_1.png")
 ```
 
 You can then click `Select All` and then `Install Updates`.
 
-```{r, echo=FALSE, fig.cap="Help file for the print() function.", out.width="95%"}
+```{r, echo=FALSE, fig.cap="Help file for the print() function.", out.width="50%"}
   include_graphics("../../figures/screenshots/packages_2.png")
 ```
 
