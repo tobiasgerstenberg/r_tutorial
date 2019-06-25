@@ -64,6 +64,13 @@ Once you've downloaded R Studio, install it following the instructions on the sc
 - Depending on what research you do, I strongly suggest to learn Python, too!
 - In my research, I use both languages together. 
 
+## What you already know about R 
+
+```{r, out.width="75%", echo=FALSE, fig.cap="R Survey results."}
+  include_graphics("../../figures/plots/r_survey.png")
+```
+
+
 # Setting things up 
 
 ## R Studio 
@@ -216,9 +223,9 @@ a = 1 + 2
 print(a)
 ```
 
-You can also evaluate R code in line with other text like so: The value of `a` is `r a`. Notice how for the code chunk, we use three "```" and for inline code we use a single "`" together with the letter `r` at the beginning.
+You can also evaluate R code in line with other text like so: The value of `a` is `r a`. 
 
-The nice thing about these code chunks is that they show you the output directly underneath the chunk when you run it. 
+The nice thing about these code chunks is that they show you the output directly underneath the chunk when you run it. This is also true for plots. This means you can focus on one place rather than needing to shift back and forth between multiple windows. 
 
 And a big advantage of using R Markdown is that you can render the file in different formats by "knitting" it. For example, I've created the ".html" file using this R Markdown file. This is a great way of sharing your code with others and contributing to open science this way. 
 
@@ -243,9 +250,28 @@ Using relative paths has the advantage that your collaborators can run code just
 
 ### Naming variables, functions, etc. 
 
+Personally, I like to name things consistently so that I have no trouble finding stuff even when I open up a project that I haven't worked on for a while. I try to use the following naming conventions: 
+
+```{r data-wrangling1-40, echo=FALSE}
+name = c(
+  "df.thing",
+  "l.thing",
+  "fun.thing",
+  "tmp.thing")
+use = c(
+  "for data frames",
+  "for lists",
+  "for functions",
+  "for temporary variables")
+kable(x = tibble(name, use), 
+      caption = "Some naming conventions I adopt to make my life easier.", 
+      align = c("l", "l"),
+      booktabs = TRUE)
+```
+
 ### Always load all packages at the top 
 
-This way, 
+This way, other collaborators will directly see what packages they may need to install before running the code. 
 
 ### Make sure that a script can be executed from top to bottom 
 
@@ -319,11 +345,12 @@ In particular, I'd suggest to always load `library("tidyverse")` last because it
 
 ## Importing data 
 
+We can import a comma-separated-value (csv) file like so (you can ignore the `mutate()` part for now): 
+
 ```{r, message=F}
 df.data = read_csv(file = "../../data/top2018songs.csv") %>% 
   mutate(rank = 1:nrow(.))
 ```
-
 
 ```{r, echo=F}
 tibble(column = c("id",
@@ -359,12 +386,20 @@ description = c("Spotify URI of the song",
 "The duration of the track in milliseconds.",
 "An estimated overall time signature of a track. The time signature (meter) is a notational convention to specify how many beats are in each bar (or measure).")
 ) %>% 
-  kable()
+  kable(caption = "Description of the different columns in the data frame.")
 ```
 
 > The quickest way to take a look at your data is to hover your mouse over a variable of a data frame, and press `F2`.
 
+Let's take a look at the top of the data frame: 
+
+```{r}
+df.data %>% 
+  print()
+```
+
 Here is a cheatsheet with more information about how to import data into R: 
+
 - [importing data cheatsheet](../../figures/cheatsheets/data-import.pdf)
 
 ## Data visualiztion 
@@ -492,9 +527,14 @@ ggplot(data = df.plot,
 ```
 
 Here are some cheatsheets with data visualization info: 
+
 - [ggplot2 cheatsheet](../../figures/cheatsheets/data-visualization.pdf)
 - [data visualization principles cheatsheet](../../figures/cheatsheets/visualization-principles.pdf)
 - [animation cheatsheet](../../figures/cheatsheets/gganimate.pdf)
+
+#### Practice time 
+
+
 
 ## Data manipulation 
 
@@ -502,13 +542,14 @@ Visualizing data is fun! But often, we need to spend quite a bit of time beating
 
 ### Data transformation 
 
-
 Here is the data transformation cheatsheet:
+
 - [Data transformation cheatsheet](../../figures/cheatsheets/data-transformation.pdf)
 
 ### Data wrangling 
 
 Here is the data wrangling cheatsheet (data wrangling will take some time to get familiar with):
+
 - [Data wrangling cheatsheet](../../figures/cheatsheets/data-wrangling.pdf)
 
 ## Statistics 
