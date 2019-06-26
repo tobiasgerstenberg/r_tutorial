@@ -14,29 +14,28 @@ If you have any questions about these materials, feel free to post an issue or e
 │   └── R
 ├── data
 ├── docs
-├── figures
-│   ├── cheatsheets
-│   ├── plots
-│   └── screenshots
-├── papers
-└── writeup
+└── figures
+    ├── cheatsheets
+    ├── misc
+    ├── plots
+    └── screenshots
 ```
 
-## code 
+### code 
 
-### R 
+#### R 
 
 - contains the R Markdown file
 
-## data 
+### data 
 
 - contains the spotify top 100 songs from 2018 
 
-## docs 
+### docs 
 
 - contains the html file of the analysis script (hosted on github pages)
 
-## figures 
+### figures 
 
 - contains various figures including R cheatsheets, plots, and screenshots 
 
