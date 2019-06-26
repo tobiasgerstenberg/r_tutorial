@@ -353,7 +353,7 @@ data = c(2, 3, 2, 3)
 print(sqrt(mean((prediction - data)^2)))
 ```
 
-Notice, how we have to read what this does from the inside out -- that is, we need to start in the most inside part of the parenthesis the `(model - data^2)` and work our way out. Instead, a more intuitive way of writing the same thing is using the pipe operator like so: 
+Notice, how we have to read what this does from the inside out -- that is, we need to start in the most inside part of the parenthesis the `(prediction - data^2)` and work our way out. Instead, a more intuitive way of writing the same thing is using the pipe operator like so: 
 
 ```{r tutorial-22}
 prediction = c(1, 3, 4, 5)
@@ -766,7 +766,7 @@ As we've seen, R is great for plotting and data wrangling. It's also great for d
 - Linear mixed effects models `lmer()` (using `library("lme4")`): for when your data points aren't independent (e.g. when you have repeated observations from the same participants in your experiment).
 - Bayesian models `brm()` (using `library("brms")`): if you'd like to try out some Bayesian data analysis.
 
-## Help others help you 
+# Help others help you 
 
 ```{r tutorial-51, echo=F, fig.cap="This man doesn't look particularly helpful!"}
 include_graphics("../../figures/misc/help_me_help_you.gif")
@@ -793,7 +793,7 @@ ggplot(data = mpg,
 
 Then go to `Tools > Addins > Browse Addins` and select `Reprex selection` (see Figure):
 
-```{r tutorial-54, echo=F}
+```{r tutorial-54, echo=F, out.width="50%"}
 include_graphics("../../figures/screenshots/r_reprex.png")
 ```
 
@@ -848,7 +848,7 @@ Here is a list of excellent free online books that you should check out!
 
 And of course, google and stack overflow will be your best friends when figuring stuff out! 
 
-# Print out session information 
+# Session information 
 
 ```{r tutorial-56}
 sessionInfo()
