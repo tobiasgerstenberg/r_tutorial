@@ -52,7 +52,7 @@ Once you've downloaded R Studio, install it following the instructions on the sc
 # Why R? 
 
 - What R is very good at: 
-  - data visualiztion
+  - data visualization
   - data manipulation
   - statistics 
   - project documentation with R Markdown 
@@ -132,7 +132,7 @@ This makes it much easier to see what's going on, and you can easily add comment
 
 Here is cheatsheet with more useful information about R Studio: 
 
-- [R Studio cheatsheet](../../figures/cheatsheets/rstudio-ide.pdf)
+- [R Studio cheatsheet](https://github.com/tobiasgerstenberg/r_tutorial/raw/master/figures/cheatsheets/rstudio-ide.pdf)
 
 ## Getting help
 
@@ -226,8 +226,8 @@ You can also use R Markdown to build [academic homepages](https://www.emilyzabor
 
 You can find some more information about R Markdown in the cheatsheets here: 
 
-- [R Markdown reference](../../figures/cheatsheets/rmarkdown-reference.pdf)
-- [R Markdown cheatsheet](../../figures/cheatsheets/rmarkdown.pdf)
+- [R Markdown reference](https://github.com/tobiasgerstenberg/r_tutorial/raw/master/figures/cheatsheets/rmarkdown-reference.pdf)
+- [R Markdown cheatsheet](https://github.com/tobiasgerstenberg/r_tutorial/raw/master/figures/cheatsheets/rmarkdown.pdf)
 
 ## Some general advice 
 
@@ -239,9 +239,9 @@ I suggest to always use lower case characters and avoid whitespace in folder and
 
 ### Always use relative paths 
 
-In your R Markdown file, make sure to always use relative paths rather than full paths. For example, notice how I link to the cheatsheets like so `"../../figures/cheatsheets/rmarkdown-reference.pdf"` (relative path) rather than so `"/Users/tobi/Documents/work/projects_git/r_tutorial/figures/cheatsheets/rmarkdown-reference.pdf"` (absolute path). 
+In your R Markdown file, make sure to always use relative paths rather than full paths. For example, you'll see below how I import the data like so `"../../data/top2018songs.csv"` (relative path) rather than so `"/Users/tobi/Documents/work/projects_git/r_tutorial/data/data/top2018songs.csv"` (absolute path). 
 
-Using relative paths has the advantage that your collaborators can run code just like you can. If you were to use an absolute path, then your collaborator wouldn't be able ot run the file without changing the path first. 
+Using relative paths has the advantage that your collaborators can run code just like you can. If you were to use an absolute path, then your collaborator wouldn't be able to run the file without changing the path first. 
 
 ### Naming variables, functions, etc. 
 
@@ -282,7 +282,7 @@ Learning keyboard shortcuts will speed up your workflow immensely! You can view 
 
 You can also modify and add keyboard shortcuts via `Tools > Modify Keyboard Shortcuts...`
 
-For the very eager among, you can also take a look at snippets. Snippets alow you to define code macros for pieces of code that you use often (e.g. particular kinds of plots that you like making). You can find out more about how snippets in R Studio work [here](https://www.infoworld.com/article/3396616/how-to-use-rstudio-code-snippets.html).
+For the very eager among, you can also take a look at snippets. Snippets allow you to define code macros for pieces of code that you use often (e.g. particular kinds of plots that you like making). You can find out more about how snippets in R Studio work [here](https://www.infoworld.com/article/3396616/how-to-use-rstudio-code-snippets.html).
 
 ### Use R projects 
 
@@ -331,7 +331,7 @@ There are two main ways to code in R, one is called "base R" and the other is ca
 
 This cheatsheet summarizes some of the key aspects of "base R"
 
-- [base R cheatsheet](../../figures/cheatsheets/base-r.pdf)
+- [base R cheatsheet](https://github.com/tobiasgerstenberg/r_tutorial/raw/master/figures/cheatsheets/base-r.pdf)
 
 ### The pipe `%>%`
 
@@ -456,7 +456,7 @@ df.data %>%
 
 Here is a cheatsheet with more information about how to import data into R: 
 
-- [importing data cheatsheet](../../figures/cheatsheets/data-import.pdf)
+- [importing data cheatsheet](https://github.com/tobiasgerstenberg/r_tutorial/raw/master/figures/cheatsheets/data-import.pdf)
 
 ## Data visualiztion 
 
@@ -579,9 +579,9 @@ ggsave(filename = "../../figures/plots/energy_key_mode.pdf",
 
 Here are some cheatsheets with data visualization info: 
 
-- [ggplot2 cheatsheet](../../figures/cheatsheets/data-visualization.pdf)
-- [data visualization principles cheatsheet](../../figures/cheatsheets/visualization-principles.pdf)
-- [animation cheatsheet](../../figures/cheatsheets/gganimate.pdf)
+- [ggplot2 cheatsheet](https://github.com/tobiasgerstenberg/r_tutorial/raw/master/figures/cheatsheets/data-visualization.pdf)
+- [data visualization principles cheatsheet](https://github.com/tobiasgerstenberg/r_tutorial/raw/master/figures/cheatsheets/visualization-principles.pdf)
+- [animation cheatsheet](https://github.com/tobiasgerstenberg/r_tutorial/raw/master/figures/cheatsheets/gganimate.pdf)
 
 #### Practice time 
 
@@ -713,9 +713,9 @@ df.data %>%
 
 Looks like Post Malone was killing it in 2018!
 
-Here is more information about how to transform your daata: 
+Here is more information about how to transform your data: 
 
-- [Data transformation cheatsheet](../../figures/cheatsheets/data-transformation.pdf)
+- [Data transformation cheatsheet](https://github.com/tobiasgerstenberg/r_tutorial/raw/master/figures/cheatsheets/data-transformation.pdf)
 
 ### Data wrangling 
 
@@ -741,7 +741,7 @@ tibble(verb = c("`gather()`",
 
 Here is the data wrangling cheatsheet (data wrangling will take some time to get familiar with):
 
-- [Data wrangling cheatsheet](../../figures/cheatsheets/data-wrangling.pdf)
+- [Data wrangling cheatsheet](https://github.com/tobiasgerstenberg/r_tutorial/raw/master/figures/cheatsheets/data-wrangling.pdf)
 
 ### Practice 
 
@@ -809,7 +809,7 @@ ggplot(data = mpg,
 #> Error: stat_count() must not be used with a y aesthetic.
 ```
 
-Using reprex, you will make sure that the other person will be able to recreate the error message that you got (because it runs the code with a clear enviroment -- i.e. without any packages already loaded, are variables that you may have stored in your environment). 
+Using reprex, you will make sure that the other person will be able to recreate the error message that you got (because it runs the code with a clear environment -- i.e. without any packages already loaded, are variables that you may have stored in your environment). 
 
 
 For example, if you were to run reprex on this piece of code ...
