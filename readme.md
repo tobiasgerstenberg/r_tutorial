@@ -1,6 +1,6 @@
-# CSLI R Tutorial 
+# R Tutorial
 
-This repository contains the material for the CSLI R tutorial 2019. 
+This repository contains an intro to R and RStudio. 
 
 You can see the analysis script [here](https://tobiasgerstenberg.github.io/r_tutorial/r_tutorial.html)
 
@@ -11,7 +11,6 @@ If you have any questions about these materials, feel free to post an issue or e
 ```
 .
 ├── code
-│   └── R
 ├── data
 ├── docs
 └── figures
@@ -21,21 +20,21 @@ If you have any questions about these materials, feel free to post an issue or e
     └── screenshots
 ```
 
-### code 
+### code
 
-#### R 
+#### R
 
 - contains the R Markdown file
 
-### data 
+### data
 
 - contains the spotify top 100 songs from 2018 
 
-### docs 
+### docs
 
 - contains the html file of the analysis script (hosted on github pages)
 
-### figures 
+### figures
 
 - contains various figures including R cheatsheets, plots, and screenshots 
 
