@@ -5,6 +5,7 @@ date: "October 5, 2021"
 output:
   bookdown::html_document2:
     toc: true
+    # toc_float: true
     toc_depth: 4
     theme: cosmo
     highlight: tango
@@ -267,6 +268,8 @@ Before diving into R, here are a few more general tips.
 
 By using R projects you make sure that the working directory is set correctly. You can then open multiple R projects at the same time without any conflicts between the projects (otherwise, you might overwrite variables from one script with the variables of another script using the same environment). For this tutorial, I've created the `r_tutorial.Rproj` file.
 
+You can find out more about R projects [here](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects)
+
 ## Naming folders and files
 
 I suggest to always use lower case characters and avoid whitespace in folder and file names. Either use "\_" or "-" instead of a white space. Some programs (e.g. LaTeX) cannot deal with white spaces in file paths.
@@ -505,19 +508,40 @@ First, we calculate the squared error, then we take the mean, then the square ro
 
 The pipe operator `%>%` is similar to the `+` used in `ggplot2` (for those of you who know this one already). It allows us to take step-by-step actions in a way that fits the causal order in which we want to do things.
 
-> **Tip**: The keyboard shortcut for the pipe operator is: `cmd/ctrl + shift + m` **Definitely learn this one** -- we'll use the pipe a lot!!
+> **Tip**: The keyboard shortcut for the pipe operator is: `cmd/ctrl + shift + m` **Definitely learn this one** -- you'll use the pipe a lot!!
 
 > **Tip**: Code is generally easier to read when the pipe `%>%` is at the end of a line (just like the `+` in `ggplot2`).
 
 A key advantage of using the pipe is that you don't have to save intermediate computations as new variables and this helps to keep your environment nice and clean!
 
-It takes the output of a previous computation, and inserts this output as the first argument into the next computation. You can learn more about how the pipe works here <https://r4ds.had.co.nz/pipes.html>.
+### Practice 
+
+Let's practice the pipe operator. 
+
+```{r}
+# here are some numbers
+x = seq(from = 1, to = 5, by = 1)
+
+# taking the log the standard way
+log(x)
+
+# now take the log the pipe way (write your code below)
+
+```
+
+```{r}
+# some more numbers
+x = seq(from = 10, to = 5, by = -1)
+
+# the standard way
+mean(round(sqrt(x), digits = 2))
+
+# the pipe way (write your code below)
+
+```
+
 
 # Doing stuff
-
-## Use Rstudio projects
-
-RStudio projects make it straightforward to divide your work into multiple contexts, each with their own working directory, workspace, history, and source documents. You can find out more about RStudio projects [here](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects).
 
 ## Loading packages
 
@@ -607,17 +631,17 @@ Here is a cheatsheet with more information about how to import data into R:
 We should always take a look at the data first.
 
 ```{r, out.width="95%", fig.cap="A not so good plot.", echo=F}
-include_graphics("../figures/plots/bad_plot1.png")
+include_graphics("../figures/misc/bad_plot1.png")
 ```
 
 ```{r, out.width="95%", fig.cap="Another could-be-improved plot.", echo=F}
-include_graphics("../figures/plots/bad_plot2.jpg")
+include_graphics("../figures/misc/bad_plot2.jpg")
 ```
 
 This second plots reminded me of the following:
 
 ```{r, out.width="95%", fig.cap="Correlation is not causation.", echo=F}
-include_graphics("../figures/plots/correlation_aint_causation.png")
+include_graphics("../figures/misc/correlation_aint_causation.png")
 ```
 
 Just because two lines look similar, doesn't mean that anything interesting is going on -- it certainly doesn't mean that the two phenomena represented by the lines are causally connected. For more inspiration check out this site <https://www.tylervigen.com/spurious-correlations>.
@@ -625,7 +649,7 @@ Just because two lines look similar, doesn't mean that anything interesting is g
 ### Why you should always visualize your data first
 
 ```{r datasaurus, echo=FALSE, fig.cap="**The Datasaurus Dozen**. While different in appearance, each dataset has the same summary statistics to two decimal places (mean, standard deviation, and Pearson's correlation).", out.width="95%"}
-include_graphics("../figures/plots/datasaurus_dozen.png")
+include_graphics("../figures/misc/datasaurus_dozen.png")
 ```
 
 The data sets in Figure \@ref(fig:datasaurus) all share the same summary statistics. Clearly, the data sets are not the same though.
@@ -635,7 +659,7 @@ The data sets in Figure \@ref(fig:datasaurus) all share the same summary statist
 [Here](https://www.autodeskresearch.com/publications/samestats) is the paper from which I took Figure \@ref(fig:datasaurus). It explains how the figures were generated and shows more examples for how summary statistics and some kinds of plots are insufficient to get a good sense for what's going on in the data.
 
 ```{r, out.width="95%", fig.cap="Boxplots can be misleading.", echo=F}
-include_graphics("../figures/plots/box_violin.gif")
+include_graphics("../figures/misc/box_violin.gif")
 ```
 
 ### Visualizing data using `ggplot2`
@@ -653,17 +677,17 @@ ggplot(data = df.data,
 
 Adding a best-fitting linear regression line to the scatter plot is simple:
 
-```{r, warning=FALSE}
+```{r message=FALSE, warning=FALSE}
 ggplot(data = df.data,
        mapping = aes(x = danceability,
                      y = valence)) + 
-  geom_point() +
-  geom_smooth(method = "lm")
+  geom_smooth(method = "lm") +
+  geom_point() 
 ```
 
 Here is a more involved plot that shows some of the things you can do with `ggplot2`:
 
-```{r, warning=FALSE, message=FALSE}
+```{r fig.height=6, fig.width=8, message=FALSE, warning=FALSE}
 df.plot = df.data %>% 
   mutate(mode = factor(mode,
                        levels = c(0, 1),
@@ -684,12 +708,13 @@ ggplot(data = df.plot,
              position = position_jitterdodge(dodge.width = 0.7,
                                              jitter.width = 0.1,
                                              jitter.height = 0),
+             size = 2,
              alpha = 0.3) + 
   # add means with error bars 
   stat_summary(fun.data = "mean_cl_boot",
                geom = "pointrange",
                position = position_dodge(width = 0.7),
-               size = 0.75,
+               size = 1,
                shape = 21) +
   # add the vertical lines
   geom_vline(xintercept = seq(from = 1.5, to = 11.5, by = 1),
@@ -699,18 +724,18 @@ ggplot(data = df.plot,
   labs(title = "Energy for songs with different key and mode",
        subtitle = "Energy represents a perceptual measure of intensity and activity.") + 
   # change the y-axis 
-  scale_y_continuous(breaks = seq(0.25, 1, 0.25),
-                     labels = seq(0.25, 1, 0.25),
-                     limits = c(0.25, 1)) +
+  scale_y_continuous(breaks = seq(0, 1, 0.25),
+                     labels = seq(0, 1, 0.25),
+                     limits = c(0, 1)) +
   # set the fill color 
   scale_fill_brewer(palette = "Set1") +
   # change the plotting theme
   theme_classic() +
   # adjust the text size
-  theme(text = element_text(size = 16),
-        plot.subtitle = element_text(size = 12))
+  theme(text = element_text(size = 20),
+        plot.subtitle = element_text(size = 16))
 
-# let's save the figure
+# let's save the plot
 ggsave(filename = "../figures/plots/energy_key_mode.pdf",
        width = 8,
        height = 6)
@@ -746,11 +771,9 @@ Play around with the scatter plot that you've just created by incorporating some
 
 Visualizing data is fun! But often, we need to spend quite a bit of time beating data into the right shape first. We want our data to be tidy -- a tidy data frame has one row per observation. Once we have a tidy data frame, plotting things using `ggplot2` becomes a breeze. Unfortunately, many data files aren't tidy at all to start off with. For example, if you use Qualtrics to run your experiment, the data output will be far from tidy. So we have to learn how to beat our data into shape.
 
-### Data transformation
-
 We often want to do things our data frame such as filter out certain observations, select a subset of the columns, rename variables, sort the rows, create new variables, and summarize the data in different ways. Here, we'll take a quick look at these data transformations in R.
 
-#### `filter`
+### `filter`
 
 Let's filter out only the songs by the artist "Drake".
 
@@ -766,7 +789,7 @@ df.data %>%
   filter(artists == "Drake" & danceability > 0.8)
 ```
 
-#### `select()`
+### `select()`
 
 Let's say we are only interested in a subset of the columns. We can use `select()` to do so:
 
@@ -784,7 +807,7 @@ df.data %>%
 
 Now we have a data frame that has all the columns except for the `id` column.
 
-#### `rename()`
+### `rename()`
 
 Renaming variables is simple!
 
@@ -794,7 +817,7 @@ df.data %>%
          singer = artists)
 ```
 
-#### `arrange()`
+### `arrange()`
 
 Let's rearrange the rows of the data frame to show the most danceable song first (since all we really care about is danceability!!).
 
@@ -812,7 +835,7 @@ df.data %>%
 
 The DJ better not play "Dusk Till Dawn - Radio Edit" the next time I go out!
 
-#### `mutate()`
+### `mutate()`
 
 We can create new variables using `mutate()`.
 
@@ -832,7 +855,7 @@ df.data %>%
 
 Sofia Reyes wins!
 
-#### `group_by()` and `summarize()`
+### `group_by()` and `summarize()`
 
 Grouping and summarizing is a very powerful combination! For example, let's say that we are interested in what the average rank of each artist is who had more than one song in the top 100. Here is how we could go about it.
 
@@ -855,7 +878,7 @@ Here is more information about how to transform your data:
 
 -   [Data transformation cheatsheet](../figures/cheatsheets/data-transformation.pdf)
 
-### Data wrangling
+### Some more important verbs
 
 Beating data into the shape we'd like it to be can be frustrating. So it's good practice to learn how to do it, so that you can get to the fun stuff as quickly as possible (such as making cool looking plots!).
 
@@ -879,7 +902,7 @@ Here is the data wrangling cheatsheet (data wrangling will take some time to get
 
 -   [Data wrangling cheatsheet](../figures/cheatsheets/tidyr.pdf)
 
-#### Practice time
+### Practice time
 
 What was the longest song in the Spotify top 100 of 2018?
 
@@ -889,23 +912,15 @@ What was the longest song in the Spotify top 100 of 2018?
 
 What was the mean liveliness of all songs by Drake?
 
-```{r}
-# write your code here
-```
-
 ## Statistics
 
-As we've seen, R is great for plotting and data wrangling. It's also great for doing statistics! Again, We won't have the time to go into it in this class. Most of your statistical needs will be met by the following functions:
+As we've seen, R is great for plotting and data wrangling. It's also great for doing statistics! Again, We won't have the time to go into it in this class. Many of your statistical needs will be met by the following functions:
 
 -   Linear model `lm()`: for when you have independent observations.
 -   Linear mixed effects models `lmer()` (using `library("lme4")`): for when your data points aren't independent (e.g. when you have repeated observations from the same participants in your experiment).
--   Bayesian models `brm()` (using `library("brms")`): if you'd like to try out some Bayesian data analysis.
+-   Bayesian models `brm()` (using `library("brms")`): if you'd like to try out some Bayesian data analysis. of your statistical needs will be met by the follow of your statistical needs will be met by the following functions:
 
-# Help others help you
-
-```{r, echo=F, fig.cap="This man doesn't look particularly helpful!"}
-include_graphics("../figures/misc/help_me_help_you.gif")
-```
+# Getting help
 
 The best way to help others help you is by making a reproducible example (also called "reprex"). The "reprex" package makes it easy to generate a reproducible example that you can then share with others.
 
@@ -931,6 +946,7 @@ Then go to `Tools > Addins > Browse Addins` and select `Reprex selection` (see F
 ```{r, echo=F, out.width="50%"}
 include_graphics("../figures/screenshots/r_reprex.png")
 ```
+An alternative way is to fire up the command console via `cmd + shift + p` and then search for the command there (this is much quicker!). 
 
 You'll get the following output of running reprex on this code, which you can then email to your colleague, or share on stackoverflow when posting a question.
 
@@ -940,7 +956,7 @@ You'll get the following output of running reprex on this code, which you can th
            mapping = aes(x = class,
                          y = cty)) + 
       geom_bar()
-    #> Error: stat_count() must not be used with a y aesthetic.
+    #> Error: stat_count() can only have an x or y aesthetic.
 
 Using reprex, you will make sure that the other person will be able to recreate the error message that you got (because it runs the code with a clear environment -- i.e. without any packages already loaded, are variables that you may have stored in your environment).
 
