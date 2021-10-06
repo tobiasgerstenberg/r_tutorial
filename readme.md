@@ -2,7 +2,7 @@
 
 This repository contains an intro to R and RStudio. 
 
-You can see the analysis script [here](https://tobiasgerstenberg.github.io/r_tutorial/r_tutorial.html)
+You can see the analysis script [here](https://tobiasgerstenberg.github.io/r_tutorial/)
 
 If you have any questions about these materials, feel free to post an issue or email at [gerstenberg@stanford.edu](mailto:gerstenberg@stanford.edu)
 
