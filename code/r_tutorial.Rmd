@@ -1,7 +1,6 @@
 ---
 title: "R Tutorial"
 author: "Tobias Gerstenberg"
-date: "October 5, 2021"
 output:
   bookdown::html_document2:
     toc: true
@@ -31,10 +30,6 @@ options(dplyr.summarise.inform = F)
 # set default plotting theme and text size 
 theme_set(theme_classic() + 
             theme(text = element_text(size = 24)))
-
-# set default color scheme in ggplot 
-options(ggplot2.discrete.color = RColorBrewer::brewer.pal(9,"Set1"))
-options(ggplot2.discrete.fill = RColorBrewer::brewer.pal(9,"Set1"))
 ```
 
 # Getting ready
@@ -498,7 +493,7 @@ data = c(1, 3, 4, 2, 5)
 prediction = c(1, 2, 2, 1, 4)
 
 # calculate root mean squared error the pipe way 
-rmse = (prediction-data)^2 %>% 
+rmse = (prediction - data)^2 %>% 
   mean() %>% 
   sqrt() %>% 
   print() 
